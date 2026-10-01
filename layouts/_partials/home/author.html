@@ -1,0 +1,51 @@
+<h1>{{ .Site.Params.author }}</h1>
+
+{{/* Static subtitle line(s) from `info` — theme default behavior */}}
+{{ if reflect.IsSlice .Site.Params.info }}
+<h2>{{ range .Site.Params.info }}{{ . | markdownify }}<br>{{ end }}</h2>
+{{ else }}
+<h2>{{ .Site.Params.info | markdownify }}</h2>
+{{ end }}
+
+{{/* Separate typewriter line from `typewriter` (string or list of phrases) */}}
+{{ with .Site.Params.typewriter }}
+  {{ $phrases := . }}
+  {{ if not (reflect.IsSlice .) }}{{ $phrases = slice . }}{{ end }}
+  <h3 class="tw-line"><span id="typewriter" data-phrases="{{ $phrases | jsonify }}"></span><span class="tw-cursor" aria-hidden="true">|</span></h3>
+  <script>
+    (function () {
+      var el = document.getElementById("typewriter");
+      if (!el) return;
+      var phrases;
+      try { phrases = JSON.parse(el.getAttribute("data-phrases")); } catch (e) { phrases = []; }
+      if (!phrases.length) return;
+
+      var typeSpeed = 70, eraseSpeed = 35, holdFull = 1600, holdEmpty = 400;
+      var p = 0, i = 0, erasing = false;
+
+      function tick() {
+        var text = phrases[p];
+        if (!erasing) {
+          el.textContent = text.slice(0, i + 1);
+          i++;
+          if (i === text.length) {
+            if (phrases.length === 1) return; // single phrase: type once, keep it
+            erasing = true;
+            return setTimeout(tick, holdFull);
+          }
+          return setTimeout(tick, typeSpeed);
+        } else {
+          el.textContent = text.slice(0, i - 1);
+          i--;
+          if (i === 0) {
+            erasing = false;
+            p = (p + 1) % phrases.length;
+            return setTimeout(tick, holdEmpty);
+          }
+          return setTimeout(tick, eraseSpeed);
+        }
+      }
+      tick();
+    })();
+  </script>
+{{ end }}

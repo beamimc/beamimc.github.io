@@ -5,6 +5,25 @@
   font-size: 2.2rem;
 }
 
+/* Homepage typewriter line (separate from the static info subtitle) */
+.tw-line {
+  font-size: 1.1rem;
+  font-weight: 400;
+  opacity: 0.8;
+  margin-top: 0.4rem;
+  min-height: 1.4em; /* reserve space so layout doesn't jump while typing */
+}
+/* Blinking cursor for the homepage typewriter (see layouts/_partials/home/author.html) */
+.tw-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  font-weight: 400;
+  animation: tw-blink 1s step-end infinite;
+}
+@keyframes tw-blink {
+  50% { opacity: 0; }
+}
+
 /* ============================================================
    CV / timeline style — shared by the Experience and Talks pages
    ============================================================ */

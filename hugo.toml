@@ -22,8 +22,11 @@ category = 'categories'
   author = 'Bea'
   description = 'Notes, projects, and things worth sharing.'
   keywords = 'personal,projects,research'
-  # Lines shown under your name on the landing page (edit these)
-  info = ['PhD student']#, 'Projects · Experience · Talks']
+  # Static line(s) shown under your name on the landing page
+  info = ['PhD student']
+  # Typewriter line typed out below the info (set to '' to hide it).
+  # Can also be a list of phrases to cycle through.
+  typewriter = 'This website is still a work in progress 🚧'
   # Put your photo at static/images/avatar.jpg (or use gravatar instead)
   # avatarURL = 'images/avatar.jpg'
   # gravatar = 'beatrizcampillo29@gmail.com'
