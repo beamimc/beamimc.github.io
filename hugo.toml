@@ -26,7 +26,7 @@ category = 'categories'
   info = ['PhD student']
   # Typewriter line typed out below the info (set to '' to hide it).
   # Can also be a list of phrases to cycle through.
-  typewriter = 'This website is still a work in progress 🚧'
+  typewriter = "This website is still a work in progress 🚧\nMore to come!"
   # Put your photo at static/images/avatar.jpg (or use gravatar instead)
   # avatarURL = 'images/avatar.jpg'
   # gravatar = 'beatrizcampillo29@gmail.com'

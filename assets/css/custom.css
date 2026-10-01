@@ -7,11 +7,12 @@
 
 /* Homepage typewriter line (separate from the static info subtitle) */
 .tw-line {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 400;
   opacity: 0.8;
   margin-top: 0.4rem;
   min-height: 1.4em; /* reserve space so layout doesn't jump while typing */
+  white-space: pre-line; /* render \n in the typewriter text as a line break */
 }
 /* Blinking cursor for the homepage typewriter (see layouts/_partials/home/author.html) */
 .tw-cursor {
