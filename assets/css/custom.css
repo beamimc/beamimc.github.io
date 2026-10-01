@@ -1,0 +1,60 @@
+/* Site-wide overrides (applied on every page). */
+
+/* Smaller page title on list pages (Software, Experience, Talks, ...) */
+.list .title {
+  font-size: 2.2rem;
+}
+
+/* ============================================================
+   CV / timeline style — shared by the Experience and Talks pages
+   ============================================================ */
+.cv { text-align: left; }
+.cv-section { margin-bottom: 2.5rem; }
+.cv-section-title {
+  font-size: 2rem;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+/* Timeline: vertical line running down the left of each section */
+.cv-timeline { position: relative; padding-left: 1.75rem; }
+.cv-timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: #e0e0e0;
+}
+.cv-entry { position: relative; margin-bottom: 1.6rem; }
+/* Dot on the line for each entry */
+.cv-entry::before {
+  content: "";
+  position: absolute;
+  left: -1.75rem;
+  top: 7px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1565c0;
+  border: 3px solid #fafafa;
+  box-sizing: border-box;
+}
+.cv-entry-head { font-size: 1.4rem; }
+.cv-role { font-weight: 700; }
+.cv-org { font-weight: 400; opacity: 0.9; }
+.cv-dates { font-size: 1.1rem; opacity: 0.7; margin-top: 0.2rem; }
+.cv-advisor { font-size: 1.1rem; font-style: italic; opacity: 0.8; margin-top: 0.2rem; }
+.cv-details { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+.cv-details li { margin-bottom: 0.3rem; font-size: 1.15rem; line-height: 1.4; }
+
+/* Dark mode */
+body.colorscheme-dark .cv-section-title { border-bottom-color: #4f4f4f; }
+body.colorscheme-dark .cv-timeline::before { background: #4f4f4f; }
+body.colorscheme-dark .cv-entry::before { background: #42a5f5; border-color: #212121; }
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto .cv-section-title { border-bottom-color: #4f4f4f; }
+  body.colorscheme-auto .cv-timeline::before { background: #4f4f4f; }
+  body.colorscheme-auto .cv-entry::before { background: #42a5f5; border-color: #212121; }
+}

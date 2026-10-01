@@ -1,0 +1,28 @@
+# =============================================================
+# Talks page content. Edit this file to update the page.
+# Each section has a `title` and a list of `entries`.
+# Per entry: title (the event), type (Talk/Poster), dates
+# (shown), sort (ISO YYYY-MM, used only for ordering),
+# location (all optional), and optional `details` bullets.
+# The page lists talks newest-first using the `sort` value.
+# =============================================================
+sections:
+  - title: Talks
+    entries:
+      - title: "Bioconductor Conference 2025"
+        type: "Talk"
+        dates: "Jun 2025"
+        sort: "2025-06"
+        location: "Cold Spring Harbor, NY, USA"
+
+      - title: "useR! Conference 2025"
+        type: "Talk"
+        dates: "Aug 2025"
+        sort: "2025-08"
+        location: "Duke University, Durham, NC, USA"
+
+      - title: "European Bioconductor Conference 2026"
+        type: "Talk"
+        dates: "Jul 2026"
+        sort: "2026-07"
+        location: "Turku, Finland"

@@ -1,0 +1,78 @@
+baseURL = 'https://beamimc.github.io/'
+title = "Beatriz Campillo"
+theme = 'hugo-coder'
+languageCode = 'en'
+defaultContentLanguage = 'en'
+enableEmoji = true
+enableRobotsTXT = true
+
+[pagination]
+pagerSize = 6
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+tag = 'tags'
+category = 'categories'
+
+[params]
+  author = 'Bea'
+  description = 'Notes, projects, and things worth sharing.'
+  keywords = 'personal,projects,research'
+  # Lines shown under your name on the landing page (edit these)
+  info = ['PhD student']#, 'Projects · Experience · Talks']
+  # Put your photo at static/images/avatar.jpg (or use gravatar instead)
+  # avatarURL = 'images/avatar.jpg'
+  # gravatar = 'beatrizcampillo29@gmail.com'
+  dateFormat = 'January 2, 2006'
+  since = 2026
+  # Color scheme: "auto" (follow browser), "light", or "dark"
+  colorScheme = 'auto'
+  hideColorSchemeToggle = false
+  # Site-wide custom stylesheet (assets/css/custom.css)
+  customCSS = ['css/custom.css']
+
+# Social icons on the landing page — add/remove as you like.
+# icon uses Font Awesome classes.
+[[params.social]]
+  name = 'Github'
+  icon = 'fa-brands fa-github fa-2x'
+  weight = 1
+  url = 'https://github.com/beamimc/'
+
+[[params.social]]
+  name = 'LinkedIn'
+  icon = 'fa-brands fa-linkedin fa-2x'
+  weight = 2
+  url = 'https://www.linkedin.com/in/beatriz-campillo-586bb486'
+
+# [[params.social]]
+#   name = 'Email'
+#   icon = 'fa-solid fa-envelope fa-2x'
+#   weight = 3
+#   url = 'mailto:you@example.com'
+
+# [[params.social]]
+#   name = 'Google Scholar'
+#   icon = 'fa-brands fa-google-scholar fa-2x'
+#   weight = 4
+#   url = 'https://scholar.google.com/citations?user=YOURID'
+
+# Top navigation tabs
+[[menu.main]]
+  name = 'Software'
+  weight = 1
+  url = 'software/'
+
+[[menu.main]]
+  name = 'Experience'
+  weight = 2
+  url = 'experience/'
+
+[[menu.main]]
+  name = 'Talks'
+  weight = 3
+  url = 'talks/'

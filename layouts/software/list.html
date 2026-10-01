@@ -1,0 +1,103 @@
+{{ define "title" }}
+  {{- .Title }} · {{ .Site.Title -}}
+{{ end }}
+{{ define "content" }}
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+    text-align: left;
+  }
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 1.25rem;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .project-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+  .project-logo {
+    display: block;
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    margin: 0 auto 1rem;
+  }
+  .project-title { margin: 0 0 0.4rem; font-size: 1.8rem; line-height: 1.25; text-align: center; }
+  .project-title a { text-decoration: none; }
+  .project-desc { margin: 0 0 0.9rem; font-size: 1.25rem; line-height: 1.4; opacity: 0.85; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.9rem; }
+  .project-tag {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 0.08rem 0.55rem;
+    border-radius: 4px;
+    background: #eceff1;
+    color: #37474f;
+  }
+  .project-links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .project-btn {
+    font-size: 1.15rem;
+    padding: 0.45rem 1rem;
+    border: 1px solid #1565c0;
+    border-radius: 6px;
+    color: #1565c0;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .project-btn:hover { background: #1565c0; color: #fff; }
+
+  /* Dark mode — forced toggle */
+  body.colorscheme-dark .project-card { background: #2a2a2a; border-color: #4f4f4f; }
+  body.colorscheme-dark .project-tag { background: #424242; color: #dadada; }
+  body.colorscheme-dark .project-btn { border-color: #42a5f5; color: #42a5f5; }
+  body.colorscheme-dark .project-btn:hover { background: #42a5f5; color: #212121; }
+  /* Dark mode — auto (follows OS) */
+  @media (prefers-color-scheme: dark) {
+    body.colorscheme-auto .project-card { background: #2a2a2a; border-color: #4f4f4f; }
+    body.colorscheme-auto .project-tag { background: #424242; color: #dadada; }
+    body.colorscheme-auto .project-btn { border-color: #42a5f5; color: #42a5f5; }
+    body.colorscheme-auto .project-btn:hover { background: #42a5f5; color: #212121; }
+  }
+</style>
+
+<section class="container list software-list">
+  <header>
+    <h1 class="title">{{ .Title }}</h1>
+  </header>
+
+  {{ .Content }}
+
+  <div class="project-grid">
+    {{ range .Pages.ByWeight }}
+      {{ $logo := "" }}
+      {{ with .Resources.GetMatch (.Params.logo | default "logo.*") }}{{ $logo = .RelPermalink }}{{ end }}
+      <article class="project-card">
+        {{ $title := .Title }}
+        {{ with $logo }}<img class="project-logo" src="{{ . }}" alt="{{ $title }} logo">{{ end }}
+        <h2 class="project-title">
+          {{- if .Params.details }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ else }}{{ .Title }}{{ end -}}
+        </h2>
+        {{ with .Params.description }}<p class="project-desc">{{ . }}</p>{{ end }}
+        {{ with .Params.tags }}
+          <div class="project-tags">
+            {{ range . }}<span class="project-tag">{{ . }}</span>{{ end }}
+          </div>
+        {{ end }}
+        <div class="project-links">
+          {{ with .Params.repo }}<a class="project-btn" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>{{ end }}
+          {{ with .Params.docs }}<a class="project-btn" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-book"></i> Docs</a>{{ end }}
+          {{ if .Params.details }}<a class="project-btn" href="{{ .RelPermalink }}">Read more</a>{{ end }}
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

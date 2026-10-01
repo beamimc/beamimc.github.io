@@ -1,0 +1,43 @@
+# =============================================================
+# Experience page content. Edit this file to update the page.
+# Each section has a `title` and a list of `entries`.
+# Per entry: role, organization, dates, location (all optional),
+# an optional `advisor`, and optional `details` bullet points.
+# Remove any field you don't need; add as many entries as you like.
+# =============================================================
+sections:
+  - title: Experience
+    entries:
+      - role: "PhD Student"
+        organization: "University of North Carolina at Chapel Hill"
+        dates: "Aug 2024 – Present"
+        location: "Chapel Hill, NC, USA"
+        details: []
+        
+      - role: "Research Assistant II"
+        organization: "Baylor College of Medicine"
+        dates: "May 2022 – Jul 2024"
+        location: "Houston, TX, USA"
+        details: []
+
+      - role: "Data Analyst"
+        organization: "BIsiona Business Solutions"
+        dates: "Feb 2021 – Apr 2022"
+        location: "Madrid, Spain"
+        details: []
+
+      - role: "Research Intern"
+        organization: "Centro de Biotecnología y Genómica de Plantas"
+        dates: "Aug 2019 – Jul 2020"
+        location: "Madrid, Spain"
+        details: []
+
+  - title: Education
+    entries:
+      - role: "M.Sc. in Artificial Intelligence"
+        organization: "Universidad Politécnica de Madrid"
+        dates: "2020 – 2021"
+
+      - role: "B.Sc. in Computational Biotechnology"
+        organization: "Universidad Politécnica de Madrid"
+        dates: "2016 – 2020"

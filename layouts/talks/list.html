@@ -1,0 +1,40 @@
+{{ define "title" }}
+  {{- .Title }} · {{ .Site.Title -}}
+{{ end }}
+{{ define "content" }}
+<section class="container list cv">
+  <header>
+    <h1 class="title">{{ .Title }}</h1>
+  </header>
+
+  {{ .Content }}
+
+  {{ range .Site.Data.talks.sections }}
+    <div class="cv-section">
+      {{ if ne .title $.Title }}<h2 class="cv-section-title">{{ .title }}</h2>{{ end }}
+      <div class="cv-timeline">
+      {{ range (sort .entries "sort" "desc") }}
+        <div class="cv-entry">
+          <div class="cv-entry-head">
+            <span class="cv-role">{{ .title }}</span>
+            {{ with .type }}<span class="cv-org"> · {{ . }}</span>{{ end }}
+          </div>
+          {{ if or .dates .location }}
+            <div class="cv-dates">
+              {{- with .dates }}{{ . }}{{ end -}}
+              {{- if and .dates .location }} · {{ end -}}
+              {{- with .location }}{{ . }}{{ end -}}
+            </div>
+          {{ end }}
+          {{ with .details }}
+            <ul class="cv-details">
+              {{ range . }}<li>{{ . | markdownify }}</li>{{ end }}
+            </ul>
+          {{ end }}
+        </div>
+      {{ end }}
+      </div>
+    </div>
+  {{ end }}
+</section>
+{{ end }}
