@@ -11,6 +11,8 @@
     text-align: left;
   }
   .project-card {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     border: 1px solid #e0e0e0;
@@ -30,9 +32,24 @@
     object-fit: contain;
     margin: 0 auto 1rem;
   }
+  /* Full-bleed preview image across the top of the card (whole image shown, never cropped) */
+  .project-cover {
+    display: block;
+    box-sizing: border-box;
+    width: calc(100% + 2.5rem);
+    margin: -1.25rem -1.25rem 1.1rem;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    padding: 1rem;
+    background: #ffffff; /* figures are drawn for a white page */
+    border-bottom: 1px solid #e0e0e0;
+  }
   .project-title { margin: 0 0 0.4rem; font-size: 1.8rem; line-height: 1.25; text-align: center; }
   .project-title a { text-decoration: none; }
-  .project-desc { margin: 0 0 0.9rem; font-size: 1.25rem; line-height: 1.4; opacity: 0.85; }
+  /* Make the whole card clickable; buttons stay above the overlay */
+  .project-card-link::after { content: ""; position: absolute; inset: 0; }
+  .project-links { position: relative; z-index: 1; }
+  .project-desc { margin: 0 0 0.9rem; font-size: 1.25rem; line-height: 1.4; opacity: 0.85; text-align: left; hyphens: manual; }
   .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.9rem; }
   .project-tag {
     font-size: 0.9rem;
@@ -81,9 +98,14 @@
       {{ with .Resources.GetMatch (.Params.logo | default "logo.*") }}{{ $logo = .RelPermalink }}{{ end }}
       <article class="project-card">
         {{ $title := .Title }}
-        {{ with $logo }}<img class="project-logo" src="{{ . }}" alt="{{ $title }} logo">{{ end }}
+        {{ with .Resources.GetMatch (.Params.cover | default "cover.*") }}
+          {{ with .Resize "800x webp" }}<img class="project-cover" src="{{ .RelPermalink }}" alt="{{ $title }} preview">{{ end }}
+        {{ else }}
+          {{ with $logo }}<img class="project-logo" src="{{ . }}" alt="{{ $title }} logo">{{ end }}
+        {{ end }}
         <h2 class="project-title">
-          {{- if .Params.details }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ else }}{{ .Title }}{{ end -}}
+          {{- /* With details, the title link stretches over the whole card (see .project-card-link) */ -}}
+          {{- if .Params.details }}<a class="project-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a>{{ else }}{{ .Title }}{{ end -}}
         </h2>
         {{ with .Params.description }}<p class="project-desc">{{ . }}</p>{{ end }}
         {{ with .Params.tags }}
@@ -91,11 +113,12 @@
             {{ range . }}<span class="project-tag">{{ . }}</span>{{ end }}
           </div>
         {{ end }}
+        {{ if or .Params.repo .Params.docs }}
         <div class="project-links">
           {{ with .Params.repo }}<a class="project-btn" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>{{ end }}
           {{ with .Params.docs }}<a class="project-btn" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-book"></i> Docs</a>{{ end }}
-          {{ if .Params.details }}<a class="project-btn" href="{{ .RelPermalink }}">Read more</a>{{ end }}
         </div>
+        {{ end }}
       </article>
     {{ end }}
   </div>

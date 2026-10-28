@@ -1,0 +1,20 @@
+{{- /* A section rendered like a single page (title + content, no post list).
+  Opt in with `layout = 'page-section'` in the section's _index.md. */ -}}
+{{ define "title" }}
+  {{- .Title }} · {{ .Site.Title -}}
+{{ end }}
+{{ define "content" }}
+<section class="container page project-page">
+  <article>
+    {{ with .Parent }}
+    <nav class="page-nav">
+      <a href="{{ .RelPermalink }}"><i class="fa-solid fa-arrow-left"></i> {{ .Title }}</a>
+    </nav>
+    {{ end }}
+    <header>
+      <h1 class="title">{{ .Title }}</h1>
+    </header>
+    {{ .Content }}
+  </article>
+</section>
+{{ end }}

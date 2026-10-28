@@ -1,0 +1,20 @@
+{{- /* A page that shows one PDF / standalone HTML file full-width in an iframe.
+  Opt in with `layout = 'embed'` and `doc = 'path/from/site/root'` in front matter. */ -}}
+{{ define "title" }}
+  {{- .Title }} · {{ .Parent.Title }} · {{ .Site.Title -}}
+{{ end }}
+{{ define "content" }}
+{{ $src := .Params.doc | relURL }}
+<section class="container page embed-page">
+  <nav class="page-nav">
+    {{ with .Parent }}<a href="{{ .RelPermalink }}"><i class="fa-solid fa-arrow-left"></i> {{ .Title }}</a>{{ end }}
+    <a href="{{ $src }}" target="_blank" rel="noopener">Open in a new tab <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+  </nav>
+  <header>
+    <h1 class="title">{{ .Title }}</h1>
+  </header>
+  <div class="embed-frame">
+    <iframe src="{{ $src }}" title="{{ .Title }}"></iframe>
+  </div>
+</section>
+{{ end }}

@@ -7,6 +7,9 @@ on:
     branches: [main]
   # Allow manual runs from the Actions tab
   workflow_dispatch:
+  # Rebuild daily to pick up new workflow HTMLs from splicelogic-paper
+  schedule:
+    - cron: '0 6 * * *'
 
 # Permissions needed to deploy to GitHub Pages
 permissions:
@@ -41,6 +44,8 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Fetch workflow HTMLs from splicelogic-paper
+        run: bash scripts/fetch-workflows.sh
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

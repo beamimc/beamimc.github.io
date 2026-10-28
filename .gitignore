@@ -2,3 +2,6 @@
 /public/
 /resources/
 .hugo_build.lock
+
+# Fetched at build time by scripts/fetch-workflows.sh (source: splicelogic-paper)
+/static/projects/ptbp1-splicelogic/*_workflow.html

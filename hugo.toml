@@ -71,11 +71,16 @@ category = 'categories'
   url = 'software/'
 
 [[menu.main]]
-  name = 'Experience'
+  name = 'Projects'
   weight = 2
+  url = 'projects/'
+
+[[menu.main]]
+  name = 'Experience'
+  weight = 3
   url = 'experience/'
 
 [[menu.main]]
   name = 'Talks'
-  weight = 3
+  weight = 4
   url = 'talks/'

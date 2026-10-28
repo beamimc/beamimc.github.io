@@ -1,7 +1,10 @@
 /* Site-wide overrides (applied on every page). */
 
-/* Smaller page title on list pages (Software, Experience, Talks, ...) */
-.list .title {
+/* Smaller page title on list pages (Software, Experience, Talks, ...)
+   and on project / embedded-document pages */
+.list .title,
+.project-page .title,
+.embed-page .title {
   font-size: 2.2rem;
 }
 
@@ -23,6 +26,84 @@
 }
 @keyframes tw-blink {
   50% { opacity: 0; }
+}
+
+/* Big icon link tiles on project pages (see layouts/_shortcodes/link-tiles.html) */
+.link-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+@media only screen and (max-width: 768px) {
+  .link-tiles { grid-template-columns: 1fr; }
+}
+.link-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.25rem 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #ffffff;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+}
+.link-tile:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  border-color: #1565c0;
+}
+/* Image icons and Font Awesome icons share the same box so tiles line up */
+.link-tile-img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 1.25rem; }
+.link-tile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 140px;
+  font-size: 9rem;
+  color: #1565c0;
+  margin-bottom: 1.25rem;
+}
+.link-tile-label { font-size: 1.5rem; font-weight: 700; line-height: 1.3; }
+.link-tile-desc { font-size: 1.1rem; opacity: 0.75; margin-top: 0.4rem; line-height: 1.4; }
+
+body.colorscheme-dark .link-tile { background: #2a2a2a; border-color: #4f4f4f; }
+body.colorscheme-dark .link-tile:hover { border-color: #42a5f5; }
+body.colorscheme-dark .link-tile-icon { color: #42a5f5; }
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto .link-tile { background: #2a2a2a; border-color: #4f4f4f; }
+  body.colorscheme-auto .link-tile:hover { border-color: #42a5f5; }
+  body.colorscheme-auto .link-tile-icon { color: #42a5f5; }
+}
+
+/* Back / open links above the title (layouts/embed.html, layouts/page-section.html) */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  margin-top: 4rem;
+}
+/* The nav takes over the theme's big gap above the title */
+.page-nav + header { margin-top: 1rem; }
+
+/* Full-page embedded document (see layouts/embed.html) */
+.embed-page { max-width: none; }
+.embed-frame {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff; /* standalone HTML reports assume a white page */
+}
+.embed-frame iframe { display: block; width: 100%; height: 85vh; border: 0; }
+body.colorscheme-dark .embed-frame { border-color: #4f4f4f; }
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto .embed-frame { border-color: #4f4f4f; }
 }
 
 /* ============================================================

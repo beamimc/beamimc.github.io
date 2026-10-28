@@ -1,0 +1,16 @@
+{{- /* Render the current section's child pages as big icon tiles.
+  Usage: {{< link-tiles >}} in a section's _index.md. Each child page uses an
+  icon.* image from its bundle if present, else the Font Awesome `icon` param. */ -}}
+<div class="link-tiles">
+  {{- range .Page.Pages.ByWeight }}
+  <a class="link-tile" href="{{ .RelPermalink }}">
+    {{- with .Resources.GetMatch "icon.*" }}
+    <img class="link-tile-img" src="{{ .RelPermalink }}" alt="">
+    {{- else }}
+    <i class="link-tile-icon {{ .Params.icon | default "fa-solid fa-link" }}"></i>
+    {{- end }}
+    <span class="link-tile-label">{{ .Title }}</span>
+    {{ with .Description }}<span class="link-tile-desc">{{ . }}</span>{{ end }}
+  </a>
+  {{- end }}
+</div>
