@@ -1,0 +1,41 @@
+{{/* Homepage sections below the intro: Software and Projects, pulled from content/ */}}
+<section class="container home-sections">
+  {{ with site.GetPage "/software" }}
+  <div class="home-section">
+    <h2 class="home-section-title">{{ .Title }} <a href="{{ .RelPermalink }}">All {{ lower .Title }} <i class="fa-solid fa-arrow-right"></i></a></h2>
+    <div class="home-sw-grid">
+      {{ range .Pages.ByWeight }}
+        {{ $title := .Title }}
+        {{/* Software entries have no page of their own: link to docs, else the repo */}}
+        {{ $href := .Params.docs | default .Params.repo | default .Parent.RelPermalink }}
+        <a class="home-sw-card" href="{{ $href }}"{{ if hasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>
+          {{ with .Resources.GetMatch (.Params.logo | default "logo.*") }}<img src="{{ .RelPermalink }}" alt="{{ $title }} logo">{{ end }}
+          <span>
+            <b>{{ .Title }}</b>
+            {{ with .Description }}<small>{{ . }}</small>{{ end }}
+          </span>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{ with site.GetPage "/projects" }}
+  <div class="home-section">
+    <h2 class="home-section-title">{{ .Title }} <a href="{{ .RelPermalink }}">All {{ lower .Title }} <i class="fa-solid fa-arrow-right"></i></a></h2>
+    {{ range first 3 .Pages.ByWeight }}
+      {{ $title := .Title }}
+      <a class="home-proj-card" href="{{ .RelPermalink }}">
+        {{ with .Resources.GetMatch (.Params.cover | default "cover.*") }}
+          {{ with .Resize "400x webp" }}<img src="{{ .RelPermalink }}" alt="{{ $title }} preview">{{ end }}
+        {{ end }}
+        <span>
+          <b>{{ .Title }}</b>
+          {{ with .Description }}<small>{{ . }}</small>{{ end }}
+          <em>Explore <i class="fa-solid fa-arrow-right"></i></em>
+        </span>
+      </a>
+    {{ end }}
+  </div>
+  {{ end }}
+</section>

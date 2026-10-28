@@ -19,6 +19,8 @@
       var phrases;
       try { phrases = JSON.parse(el.getAttribute("data-phrases")); } catch (e) { phrases = []; }
       if (!phrases.length) return;
+      // Split into characters (not UTF-16 units) so emoji never show up half-typed
+      phrases = phrases.map(function (s) { return Array.from(s); });
 
       var typeSpeed = 70, eraseSpeed = 35, holdFull = 1600, holdEmpty = 400;
       var p = 0, i = 0, erasing = false;
@@ -26,7 +28,7 @@
       function tick() {
         var text = phrases[p];
         if (!erasing) {
-          el.textContent = text.slice(0, i + 1);
+          el.textContent = text.slice(0, i + 1).join("");
           i++;
           if (i === text.length) {
             if (phrases.length === 1) return; // single phrase: type once, keep it
@@ -35,7 +37,7 @@
           }
           return setTimeout(tick, typeSpeed);
         } else {
-          el.textContent = text.slice(0, i - 1);
+          el.textContent = text.slice(0, i - 1).join("");
           i--;
           if (i === 0) {
             erasing = false;
