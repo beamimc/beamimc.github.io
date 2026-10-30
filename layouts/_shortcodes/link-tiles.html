@@ -1,16 +1,22 @@
-{{- /* Render the current section's child pages as big icon tiles.
+{{- /* Render the current section's child pages, then its external `links`
+  param (name, url, icon), as one row of icon buttons.
   Usage: {{< link-tiles >}} in a section's _index.md. Each child page uses an
   icon.* image from its bundle if present, else the Font Awesome `icon` param. */ -}}
-<div class="link-tiles">
+<div class="link-buttons">
   {{- range .Page.Pages.ByWeight }}
-  <a class="link-tile" href="{{ .RelPermalink }}">
+  <a class="link-button" href="{{ .RelPermalink }}"{{ with .Description }} title="{{ . }}"{{ end }}>
     {{- with .Resources.GetMatch "icon.*" }}
-    <img class="link-tile-img" src="{{ .RelPermalink }}" alt="">
+    <img class="link-button-img" src="{{ .RelPermalink }}" alt="">
     {{- else }}
-    <i class="link-tile-icon {{ .Params.icon | default "fa-solid fa-link" }}"></i>
+    <i class="{{ .Params.icon | default "fa-solid fa-link" }}"></i>
     {{- end }}
-    <span class="link-tile-label">{{ .Title }}</span>
-    {{ with .Description }}<span class="link-tile-desc">{{ . }}</span>{{ end }}
+    <span>{{ .Title }}</span>
+  </a>
+  {{- end }}
+  {{- range .Page.Params.links }}
+  <a class="link-button" href="{{ .url }}" target="_blank" rel="noopener">
+    <i class="{{ .icon | default "fa-solid fa-arrow-up-right-from-square" }}"></i>
+    <span>{{ .name }}</span>
   </a>
   {{- end }}
 </div>

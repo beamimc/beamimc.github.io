@@ -115,56 +115,36 @@ body.colorscheme-dark .home-proj-card em { color: #22d3ee; }
   50% { opacity: 0; }
 }
 
-/* Big icon link tiles on project pages (see layouts/_shortcodes/link-tiles.html) */
-.link-tiles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-@media only screen and (max-width: 768px) {
-  .link-tiles { grid-template-columns: 1fr; }
-}
-.link-tile {
+/* Icon link buttons (layouts/_shortcodes/link-tiles.html, software/project cards) */
+.link-buttons {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 2rem 1.25rem 1.5rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  background: #ffffff;
-  color: inherit;
-  text-decoration: none;
-  transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+  gap: 0.75rem;
+  margin: 2rem 0;
 }
-.link-tile:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transform: translateY(-3px);
-  border-color: #0a7ea4;
-}
-/* Image icons and Font Awesome icons share the same box so tiles line up */
-.link-tile-img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 1.25rem; }
-.link-tile-icon {
-  display: flex;
+.link-button {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 140px;
-  height: 140px;
-  font-size: 9rem;
+  gap: 0.6rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid #0a7ea4;
+  border-radius: 8px;
   color: #0a7ea4;
-  margin-bottom: 1.25rem;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.link-tile-label { font-size: 1.5rem; font-weight: 700; line-height: 1.3; }
-.link-tile-desc { font-size: 1.1rem; opacity: 0.75; margin-top: 0.4rem; line-height: 1.4; }
+.link-button i { font-size: 1.7rem; }
+/* icon.* images from page bundles, sized to match the Font Awesome icons */
+.link-button-img { width: 2.2rem; height: 2.2rem; object-fit: contain; }
+.link-button:hover { background: #0a7ea4; color: #fff; }
 
-body.colorscheme-dark .link-tile { background: #2a2a2a; border-color: #4f4f4f; }
-body.colorscheme-dark .link-tile:hover { border-color: #22d3ee; }
-body.colorscheme-dark .link-tile-icon { color: #22d3ee; }
+body.colorscheme-dark .link-button { border-color: #22d3ee; color: #22d3ee; }
+body.colorscheme-dark .link-button:hover { background: #22d3ee; color: #212121; }
 @media (prefers-color-scheme: dark) {
-  body.colorscheme-auto .link-tile { background: #2a2a2a; border-color: #4f4f4f; }
-  body.colorscheme-auto .link-tile:hover { border-color: #22d3ee; }
-  body.colorscheme-auto .link-tile-icon { color: #22d3ee; }
+  body.colorscheme-auto .link-button { border-color: #22d3ee; color: #22d3ee; }
+  body.colorscheme-auto .link-button:hover { background: #22d3ee; color: #212121; }
 }
 
 /* Back / open links above the title (layouts/embed.html, layouts/page-section.html) */
