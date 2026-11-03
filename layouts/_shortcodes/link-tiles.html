@@ -1,22 +1,33 @@
 {{- /* Render the current section's child pages, then its external `links`
-  param (name, url, icon), as one row of icon buttons.
+  param (name, url, icon, description), as a grid of tiles that slide in one by one.
   Usage: {{< link-tiles >}} in a section's _index.md. Each child page uses an
   icon.* image from its bundle if present, else the Font Awesome `icon` param. */ -}}
-<div class="link-buttons">
-  {{- range .Page.Pages.ByWeight }}
-  <a class="link-button" href="{{ .RelPermalink }}"{{ with .Description }} title="{{ . }}"{{ end }}>
-    {{- with .Resources.GetMatch "icon.*" }}
-    <img class="link-button-img" src="{{ .RelPermalink }}" alt="">
-    {{- else }}
-    <i class="{{ .Params.icon | default "fa-solid fa-link" }}"></i>
-    {{- end }}
-    <span>{{ .Title }}</span>
+{{- $pages := .Page.Pages.ByWeight }}
+<div class="link-tiles">
+  {{- range $i, $p := $pages }}
+  <a class="link-tile" href="{{ .RelPermalink }}" style="--i: {{ $i }}">
+    <span class="link-tile-icon">
+      {{- with .Resources.GetMatch "icon.*" }}
+      <img src="{{ .RelPermalink }}" alt="">
+      {{- else }}
+      <i class="{{ .Params.icon | default "fa-solid fa-link" }}"></i>
+      {{- end }}
+    </span>
+    <span class="link-tile-text">
+      <b>{{ .Title }}</b>
+      {{- with .Description }}<small>{{ . }}</small>{{ end }}
+    </span>
+    <i class="link-tile-arrow fa-solid fa-arrow-right"></i>
   </a>
   {{- end }}
-  {{- range .Page.Params.links }}
-  <a class="link-button" href="{{ .url }}" target="_blank" rel="noopener">
-    <i class="{{ .icon | default "fa-solid fa-arrow-up-right-from-square" }}"></i>
-    <span>{{ .name }}</span>
+  {{- range $i, $l := .Page.Params.links }}
+  <a class="link-tile link-tile-external" href="{{ .url }}" target="_blank" rel="noopener" style="--i: {{ add $i (len $pages) }}">
+    <span class="link-tile-icon"><i class="{{ .icon | default "fa-solid fa-globe" }}"></i></span>
+    <span class="link-tile-text">
+      <b>{{ .name }}</b>
+      {{- with .description }}<small>{{ . }}</small>{{ end }}
+    </span>
+    <i class="link-tile-arrow fa-solid fa-arrow-up-right-from-square"></i>
   </a>
   {{- end }}
 </div>

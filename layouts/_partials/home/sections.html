@@ -27,7 +27,7 @@
       {{ $title := .Title }}
       <a class="home-proj-card" href="{{ .RelPermalink }}">
         {{ with .Resources.GetMatch (.Params.cover | default "cover.*") }}
-          {{ with .Resize "400x webp" }}<img src="{{ .RelPermalink }}" alt="{{ $title }} preview">{{ end }}
+          <img src="{{ partial "card-image-src.html" (dict "res" . "width" 400) }}" alt="{{ $title }} preview">
         {{ end }}
         <span>
           <b>{{ .Title }}</b>

@@ -45,20 +45,22 @@
   align-items: center;
   gap: 1.4rem;
   padding: 1.2rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
   background: #ffffff;
   color: inherit;
   text-decoration: none;
-  transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 .home-sw-card:hover,
 .home-proj-card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
-  border-color: #0a7ea4;
+  box-shadow: 0 12px 28px -10px rgba(10, 126, 164, 0.35);
+  transform: translateY(-3px);
+  border-color: rgba(10, 126, 164, 0.45);
 }
-.home-sw-card img { width: 56px; height: 56px; object-fit: contain; flex: none; }
+.home-sw-card img { width: 64px; height: 64px; object-fit: contain; flex: none; transition: transform 0.3s ease; }
+.home-sw-card:hover img { transform: scale(1.08); }
 .home-sw-card b,
 .home-proj-card b { display: block; font-size: 1.6rem; margin-bottom: 0.2rem; }
 .home-sw-card small,
@@ -83,15 +85,15 @@
 }
 
 body.colorscheme-dark .home-sw-card,
-body.colorscheme-dark .home-proj-card { background: #2a2a2a; border-color: #4f4f4f; }
+body.colorscheme-dark .home-proj-card { background: linear-gradient(145deg, #2b2b2b, #252525); border-color: rgba(255, 255, 255, 0.08); color: #dadada; }
 body.colorscheme-dark .home-sw-card:hover,
-body.colorscheme-dark .home-proj-card:hover { border-color: #22d3ee; }
+body.colorscheme-dark .home-proj-card:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 12px 28px -10px rgba(34, 211, 238, 0.3); }
 body.colorscheme-dark .home-proj-card em { color: #22d3ee; }
 @media (prefers-color-scheme: dark) {
   body.colorscheme-auto .home-sw-card,
-  body.colorscheme-auto .home-proj-card { background: #2a2a2a; border-color: #4f4f4f; }
+  body.colorscheme-auto .home-proj-card { background: linear-gradient(145deg, #2b2b2b, #252525); border-color: rgba(255, 255, 255, 0.08); color: #dadada; }
   body.colorscheme-auto .home-sw-card:hover,
-  body.colorscheme-auto .home-proj-card:hover { border-color: #22d3ee; }
+  body.colorscheme-auto .home-proj-card:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 12px 28px -10px rgba(34, 211, 238, 0.3); }
   body.colorscheme-auto .home-proj-card em { color: #22d3ee; }
 }
 
@@ -115,13 +117,92 @@ body.colorscheme-dark .home-proj-card em { color: #22d3ee; }
   50% { opacity: 0; }
 }
 
-/* Icon link buttons (layouts/_shortcodes/link-tiles.html, software/project cards) */
-.link-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin: 2rem 0;
+/* Entrance animation shared by cards and link tiles: set --i on each item to stagger.
+   `backwards` (not `both`) so hover transforms still apply once it has finished. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .link-tile, .project-card, .project-page .page-subtitle { animation: none !important; }
+}
+
+/* Subtitle under a page-section title (layouts/page-section.html) */
+.project-page .page-subtitle {
+  margin: -0.4rem 0 0;
+  font-size: 1.5rem;
+  opacity: 0.75;
+  text-align: left;
+  animation: rise-in 0.5s ease backwards;
+}
+
+/* Link tiles (layouts/_shortcodes/link-tiles.html) */
+.link-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.2rem;
+  margin: 2.4rem 0;
+}
+.link-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  background: #ffffff;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  animation: rise-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(150ms + var(--i, 0) * 80ms);
+}
+.link-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(10, 126, 164, 0.45);
+  box-shadow: 0 12px 28px -10px rgba(10, 126, 164, 0.35);
+}
+.link-tile-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 12px;
+  background: rgba(10, 126, 164, 0.1);
+  color: #0a7ea4;
+  font-size: 1.9rem;
+  transition: transform 0.25s ease;
+}
+.link-tile-icon img { width: 2.8rem; height: 2.8rem; object-fit: contain; }
+.link-tile:hover .link-tile-icon { transform: scale(1.08) rotate(-4deg); }
+.link-tile-text { flex: 1; min-width: 0; }
+.link-tile-text b { display: block; font-size: 1.45rem; line-height: 1.3; }
+.link-tile-text small { display: block; font-size: 1.15rem; line-height: 1.4; opacity: 0.7; margin-top: 0.15rem; }
+.link-tile-arrow {
+  flex: none;
+  font-size: 1.2rem;
+  color: #0a7ea4;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.link-tile:hover .link-tile-arrow { opacity: 1; transform: none; }
+
+body.colorscheme-dark .link-tile { background: linear-gradient(145deg, #2b2b2b, #252525); border-color: rgba(255, 255, 255, 0.08); color: #dadada; }
+body.colorscheme-dark .link-tile:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 12px 28px -10px rgba(34, 211, 238, 0.3); }
+body.colorscheme-dark .link-tile-icon { background: rgba(34, 211, 238, 0.12); color: #22d3ee; }
+body.colorscheme-dark .link-tile-arrow { color: #22d3ee; }
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto .link-tile { background: linear-gradient(145deg, #2b2b2b, #252525); border-color: rgba(255, 255, 255, 0.08); color: #dadada; }
+  body.colorscheme-auto .link-tile:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 12px 28px -10px rgba(34, 211, 238, 0.3); }
+  body.colorscheme-auto .link-tile-icon { background: rgba(34, 211, 238, 0.12); color: #22d3ee; }
+  body.colorscheme-auto .link-tile-arrow { color: #22d3ee; }
+}
+
+/* Icon link buttons (software/project cards) */
 .link-button {
   display: inline-flex;
   align-items: center;
@@ -136,8 +217,6 @@ body.colorscheme-dark .home-proj-card em { color: #22d3ee; }
   transition: background 0.15s ease, color 0.15s ease;
 }
 .link-button i { font-size: 1.7rem; }
-/* icon.* images from page bundles, sized to match the Font Awesome icons */
-.link-button-img { width: 2.2rem; height: 2.2rem; object-fit: contain; }
 .link-button:hover { background: #0a7ea4; color: #fff; }
 
 body.colorscheme-dark .link-button { border-color: #22d3ee; color: #22d3ee; }

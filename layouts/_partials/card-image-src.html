@@ -1,0 +1,9 @@
+{{- /* URL for a card image resource. Raster images are resized to `width` px webp;
+  GIF and SVG are passed through untouched so their animation is kept.
+  Usage: {{ $src := partial "card-image-src.html" (dict "res" $resource "width" 800) }} */ -}}
+{{- $res := .res -}}
+{{- $src := $res.RelPermalink -}}
+{{- if not (in (slice "gif" "svg" "svg+xml") $res.MediaType.SubType) -}}
+  {{- $src = ($res.Resize (printf "%dx webp" .width)).RelPermalink -}}
+{{- end -}}
+{{- return $src -}}

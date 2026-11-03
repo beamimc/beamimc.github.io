@@ -13,6 +13,7 @@
     {{ end }}
     <header>
       <h1 class="title">{{ .Title }}</h1>
+      {{ with .Description }}<p class="page-subtitle">{{ . }}</p>{{ end }}
     </header>
     {{ .Content }}
   </article>

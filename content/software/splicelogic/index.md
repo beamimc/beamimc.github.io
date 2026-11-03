@@ -6,7 +6,7 @@ tags = ['R', 'Bioconductor','alternative splicing', 'RNA-seq', 'bioinformatics']
 # Custom fields used by the card + detail page (all optional):
 repo = 'https://github.com/thelovelab/splicelogic'
 docs = 'https://thelovelab.github.io/splicelogic/'
-logo = 'splicelogic_logo.png'   # drop a logo.png (or .svg) in this folder to show an icon
+logo = 'splicelogic_logo.svg'   # animated; splicelogic_logo.png is the original still
 # details = true      # set to make the card clickable (title links + "Read more" button)
 +++
 
