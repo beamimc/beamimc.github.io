@@ -64,11 +64,11 @@ category = 'categories'
   target = '_blank'
   rel = 'noopener'
 
-# [[params.social]]
-#   name = 'Email'
-#   icon = 'fa-solid fa-envelope fa-2x'
-#   weight = 3
-#   url = 'mailto:you@example.com'
+[[params.social]]
+  name = 'Email'
+  icon = 'fa-solid fa-envelope fa-2x'
+  weight = 3
+  url = 'mailto:beacm@unc.edu'
 
 # [[params.social]]
 #   name = 'Google Scholar'
