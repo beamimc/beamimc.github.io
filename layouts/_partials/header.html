@@ -6,7 +6,7 @@
     <a class="site-title" href="{{ absLangURL "" }}">{{ .Site.Title }}</a>
 
     {{ with .Site.Menus.main }}
-    <ul class="nav-pill">
+    <ul class="nav-pill" id="site-menu">
       {{ range sort . }}
         {{ $href := index (apply (slice .URL) (.Params.urlFunc | default "relLangURL") ".") 0 }}
         {{ $active := and (ne $href "/") (hasPrefix $.RelPermalink $href) }}
@@ -21,5 +21,37 @@
       <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
     </button>
     {{ end }}
+
+    {{/* Phones only (hidden by CSS above 640px): opens the menu as a dropdown */}}
+    {{ with .Site.Menus.main }}
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="site-menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="bar-top" d="M4 7h16"/><path class="bar-mid" d="M4 12h16"/><path class="bar-bot" d="M4 17h16"/></svg>
+    </button>
+    {{ end }}
   </nav>
 </header>
+<script>
+  (function () {
+    var header = document.querySelector(".site-header");
+    var btn = header && header.querySelector(".nav-toggle");
+    if (!btn) return;
+    function setOpen(open) {
+      header.classList.toggle("nav-open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setOpen(!header.classList.contains("nav-open"));
+    });
+    // Close on a link click (incl. same-page anchors), outside click, or Escape
+    header.querySelectorAll(".nav-link").forEach(function (a) {
+      a.addEventListener("click", function () { setOpen(false); });
+    });
+    document.addEventListener("click", function (e) {
+      if (!header.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+  })();
+</script>
