@@ -1,13 +1,23 @@
 {{- /* Render the current section's child pages, then its external `links`
   param (name, url, icon, description), as a grid of tiles that slide in one by one.
   Usage: {{< link-tiles >}} in a section's _index.md. Each child page uses an
-  icon.* image from its bundle if present, else the Font Awesome `icon` param. */ -}}
+  icon.* image from its bundle if present, else the Font Awesome `icon` param.
+  An icon.svg fills the whole icon slot (for drawn/animated icons).
+  {{< link-tiles group="x" >}} shows only the children and links whose `group` is "x",
+  so one page can hold several tile blocks. */ -}}
+{{- $group := .Get "group" }}
 {{- $pages := .Page.Pages.ByWeight }}
+{{- $links := .Page.Params.links }}
+{{- with $group }}
+  {{- $pages = where $pages "Params.group" . }}
+  {{- $links = where ($links | default slice) "group" . }}
+{{- end }}
 <div class="link-tiles">
   {{- range $i, $p := $pages }}
+  {{- $img := .Resources.GetMatch "icon.*" }}
   <a class="link-tile" href="{{ .RelPermalink }}" style="--i: {{ $i }}">
-    <span class="link-tile-icon">
-      {{- with .Resources.GetMatch "icon.*" }}
+    <span class="link-tile-icon{{ if and $img (eq $img.MediaType.SubType "svg") }} link-tile-icon-art{{ end }}">
+      {{- with $img }}
       <img src="{{ .RelPermalink }}" alt="">
       {{- else }}
       <i class="{{ .Params.icon | default "fa-solid fa-link" }}"></i>
@@ -20,7 +30,7 @@
     <i class="link-tile-arrow fa-solid fa-arrow-right"></i>
   </a>
   {{- end }}
-  {{- range $i, $l := .Page.Params.links }}
+  {{- range $i, $l := $links }}
   <a class="link-tile link-tile-external" href="{{ .url }}" target="_blank" rel="noopener" style="--i: {{ add $i (len $pages) }}">
     <span class="link-tile-icon"><i class="{{ .icon | default "fa-solid fa-globe" }}"></i></span>
     <span class="link-tile-text">

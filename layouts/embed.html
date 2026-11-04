@@ -1,5 +1,7 @@
 {{- /* A page that shows one PDF / standalone HTML file full-width in an iframe.
-  Opt in with `layout = 'embed'` and `doc = 'path/from/site/root'` in front matter. */ -}}
+  Opt in with `layout = 'embed'` and `doc = 'path/from/site/root'` in front matter.
+  Optional: `aspect = '16/9'` gives the frame a fixed ratio instead of 85vh;
+  `group = 'x'` adds previous / next links to the sibling pages in the same group. */ -}}
 {{ define "title" }}
   {{- .Title }} · {{ .Parent.Title }} · {{ .Site.Title -}}
 {{ end }}
@@ -12,9 +14,27 @@
   </nav>
   <header>
     <h1 class="title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="page-subtitle">{{ . }}</p>{{ end }}
   </header>
-  <div class="embed-frame">
-    <iframe src="{{ $src }}" title="{{ .Title }}"></iframe>
+  <div class="embed-frame{{ with .Params.aspect }} embed-frame-ratio{{ end }}"{{ with .Params.aspect }} style="--ratio: {{ . | safeCSS }}"{{ end }}>
+    <iframe src="{{ $src }}" title="{{ .Title }}" allowfullscreen></iframe>
   </div>
+  {{ with .Params.group }}
+    {{ $sibs := where $.Parent.Pages.ByWeight "Params.group" . }}
+    {{ $i := 0 }}
+    {{ range $k, $p := $sibs }}{{ if eq $p $ }}{{ $i = $k }}{{ end }}{{ end }}
+    <nav class="embed-pager"{{ with $.Params.aspect }} style="width: min(100%, calc(85vh * {{ . | safeCSS }}))"{{ end }}>
+      {{ if gt $i 0 }}{{ with index $sibs (sub $i 1) }}
+      <a class="prev" href="{{ .RelPermalink }}"><i class="fa-solid fa-arrow-left"></i>
+        {{ with .Resources.GetMatch "icon.*" }}<img src="{{ .RelPermalink }}" alt="">{{ end }}
+        <span><small>Previous</small>{{ .Title }}</span></a>
+      {{ end }}{{ end }}
+      {{ if lt (add $i 1) (len $sibs) }}{{ with index $sibs (add $i 1) }}
+      <a class="next" href="{{ .RelPermalink }}">
+        <span><small>Next</small>{{ .Title }}</span>
+        {{ with .Resources.GetMatch "icon.*" }}<img src="{{ .RelPermalink }}" alt="">{{ end }}<i class="fa-solid fa-arrow-right"></i></a>
+      {{ end }}{{ end }}
+    </nav>
+  {{ end }}
 </section>
 {{ end }}

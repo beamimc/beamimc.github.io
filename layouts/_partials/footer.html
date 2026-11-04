@@ -1,0 +1,15 @@
+{{/* Override of the theme's footer. */}}
+<footer class="site-footer">
+  <section class="container">
+    <span>
+      ©
+      {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }}{{ .Site.Params.since }} – {{ end }}{{ now.Year }}
+      {{ with .Site.Params.author }}{{ . }}{{ end }}
+      · Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &amp; <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>
+    </span>
+    <span class="footer-duck">
+      debugged with
+      <img src="{{ "images/duck.svg" | relURL }}" alt="a rubber duck" width="22" height="22">
+    </span>
+  </section>
+</footer>

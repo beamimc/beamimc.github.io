@@ -1,0 +1,25 @@
+{{/* Override of the theme's header: sticky blurred bar with the site title, the main
+     menu as a pill-shaped segmented control, and the dark-mode toggle (moved here from
+     the theme's floating button; coder.js finds it by its id). */}}
+<header class="site-header">
+  <nav class="container site-nav" aria-label="Main">
+    <a class="site-title" href="{{ absLangURL "" }}">{{ .Site.Title }}</a>
+
+    {{ with .Site.Menus.main }}
+    <ul class="nav-pill">
+      {{ range sort . }}
+        {{ $href := index (apply (slice .URL) (.Params.urlFunc | default "relLangURL") ".") 0 }}
+        {{ $active := and (ne $href "/") (hasPrefix $.RelPermalink $href) }}
+        <li><a class="nav-link{{ if $active }} active{{ end }}" href="{{ $href }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+    {{ end }}
+
+    {{ if not .Site.Params.hideColorSchemeToggle }}
+    <button id="dark-mode-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.1A8.5 8.5 0 1 1 9.9 3.5a6.6 6.6 0 0 0 10.6 10.6z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+    {{ end }}
+  </nav>
+</header>

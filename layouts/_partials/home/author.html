@@ -1,17 +1,22 @@
-<h1>{{ .Site.Params.author }}</h1>
-
-{{/* Static subtitle line(s) from `info` — theme default behavior */}}
-{{ if reflect.IsSlice .Site.Params.info }}
-<h2>{{ range .Site.Params.info }}{{ . | markdownify }}<br>{{ end }}</h2>
-{{ else }}
-<h2>{{ .Site.Params.info | markdownify }}</h2>
+{{/* Hero text: mono eyebrow from `info`, greeting headline, bio, and the typewriter line. */}}
+{{ with .Site.Params.info }}
+  {{ $info := . }}
+  {{ if not (reflect.IsSlice .) }}{{ $info = slice . }}{{ end }}
+  <p class="eyebrow">// {{ delimit $info " · " }}</p>
 {{ end }}
 
-{{/* Separate typewriter line from `typewriter` (string or list of phrases) */}}
+<h1 class="hero-title">
+  {{- with .Site.Params.hero.greeting }}{{ . | markdownify }}{{ else }}{{ .Site.Params.author }}{{ end -}}
+</h1>
+
+{{/* The bio ends with a small rubber duck that wiggles on hover. */}}
+{{ with .Site.Params.hero.bio }}<p class="hero-bio">{{ . | markdownify }}<img class="hero-duck" src="{{ "images/duck.svg" | relURL }}" alt="" aria-hidden="true" title="Quack." width="22" height="22"></p>{{ end }}
+
+{{/* Typewriter line from `typewriter` (string or list of phrases) */}}
 {{ with .Site.Params.typewriter }}
   {{ $phrases := . }}
   {{ if not (reflect.IsSlice .) }}{{ $phrases = slice . }}{{ end }}
-  <h3 class="tw-line"><span id="typewriter" data-phrases="{{ $phrases | jsonify }}"></span><span class="tw-cursor" aria-hidden="true">|</span></h3>
+  <p class="tw-line"><span class="tw-prompt" aria-hidden="true">&gt;</span> <span id="typewriter" data-phrases="{{ $phrases | jsonify }}"></span><span class="tw-cursor" aria-hidden="true">▍</span></p>
   <script>
     (function () {
       var el = document.getElementById("typewriter");

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="splicelogic MXE animation icon">
+<style>.scan{animation:scan 4.8s linear infinite}.us{fill:#8A919C;animation:us 4.8s infinite}.ds{fill:#8A919C;animation:ds 4.8s infinite}.ue,.de{fill:#CC79A7}.ue{animation:ue 4.8s infinite}.de{animation:de 4.8s infinite}.gh{animation:gh 4.8s infinite}@keyframes scan{0%{transform:translateY(20px);opacity:0}6%{opacity:1}46%{transform:translateY(84px);opacity:1}52%{transform:translateY(84px);opacity:0}100%{transform:translateY(84px);opacity:0}}@keyframes us{0%{fill:#4C8DF6}33%{fill:#4C8DF6}38%{fill:#8A919C}86%{fill:#8A919C}95%{fill:#4C8DF6}100%{fill:#4C8DF6}}@keyframes ds{0%{fill:#E5484D}33%{fill:#E5484D}38%{fill:#8A919C}86%{fill:#8A919C}95%{fill:#E5484D}100%{fill:#E5484D}}@keyframes ue{0%{fill:#4C8DF6}33%{fill:#4C8DF6}35.5%{fill:#9CC0FF}38%{fill:#CC79A7}86%{fill:#CC79A7}95%{fill:#4C8DF6}100%{fill:#4C8DF6}}@keyframes de{0%{fill:#E5484D}33%{fill:#E5484D}35.5%{fill:#FF9A9D}38%{fill:#CC79A7}86%{fill:#CC79A7}95%{fill:#E5484D}100%{fill:#E5484D}}@keyframes gh{0%{opacity:0}38%{opacity:0}43%{opacity:1}84%{opacity:1}90%{opacity:0}100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}</style>
+<defs><linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C8DF6" stop-opacity="0"/><stop offset="1" stop-color="#4C8DF6" stop-opacity=".28"/></linearGradient></defs>
+<line x1="9.52" x2="91.36" y1="33" y2="33" stroke="#4C8DF6" stroke-width="2.6"/>
+<line x1="9.52" x2="91.36" y1="66" y2="66" stroke="#E5484D" stroke-width="2.6"/>
+<rect class="gh" x="46.48" y="25" width="8.8" height="16" rx="4.5" fill="#CC79A7" fill-opacity=".14" stroke="#CC79A7" stroke-width="1.3" stroke-dasharray="2.6 1.8"/>
+<rect class="gh" x="30.64" y="58" width="8.8" height="16" rx="4.5" fill="#CC79A7" fill-opacity=".14" stroke="#CC79A7" stroke-width="1.3" stroke-dasharray="2.6 1.8"/>
+<path class="us" d="M14.02 25H16.46A4.5 4.5 0 0 1 20.96 29.5V36.5A4.5 4.5 0 0 1 16.46 41H14.02A4.5 4.5 0 0 1 9.52 36.5V29.5A4.5 4.5 0 0 1 14.02 25Z"/>
+<path class="ue" d="M35.14 25H34.94A4.5 4.5 0 0 1 39.44 29.5V36.5A4.5 4.5 0 0 1 34.94 41H35.14A4.5 4.5 0 0 1 30.64 36.5V29.5A4.5 4.5 0 0 1 35.14 25Z"/>
+<path class="us" d="M66.82 25H66.62A4.5 4.5 0 0 1 71.12 29.5V36.5A4.5 4.5 0 0 1 66.62 41H66.82A4.5 4.5 0 0 1 62.32 36.5V29.5A4.5 4.5 0 0 1 66.82 25Z"/>
+<path class="us" d="M87.06 25H86.86A4.5 4.5 0 0 1 91.36 29.5V36.5A4.5 4.5 0 0 1 86.86 41H87.06A4.5 4.5 0 0 1 82.56 36.5V29.5A4.5 4.5 0 0 1 87.06 25Z"/>
+<path class="ds" d="M14.02 58H16.46A4.5 4.5 0 0 1 20.96 62.5V69.5A4.5 4.5 0 0 1 16.46 74H14.02A4.5 4.5 0 0 1 9.52 69.5V62.5A4.5 4.5 0 0 1 14.02 58Z"/>
+<path class="de" d="M50.98 58H50.78A4.5 4.5 0 0 1 55.28 62.5V69.5A4.5 4.5 0 0 1 50.78 74H50.98A4.5 4.5 0 0 1 46.48 69.5V62.5A4.5 4.5 0 0 1 50.98 58Z"/>
+<path class="ds" d="M66.82 58H66.62A4.5 4.5 0 0 1 71.12 62.5V69.5A4.5 4.5 0 0 1 66.62 74H66.82A4.5 4.5 0 0 1 62.32 69.5V62.5A4.5 4.5 0 0 1 66.82 58Z"/>
+<path class="ds" d="M87.06 58H86.86A4.5 4.5 0 0 1 91.36 62.5V69.5A4.5 4.5 0 0 1 86.86 74H87.06A4.5 4.5 0 0 1 82.56 69.5V62.5A4.5 4.5 0 0 1 87.06 58Z"/>
+<g class="scan"><rect x="4" y="-16" width="92" height="16" fill="url(#band)"/><line x1="4" x2="96" y1="0" y2="0" stroke="#4C8DF6" stroke-width="1.6" stroke-linecap="round"/></g>
+</svg>

@@ -1,0 +1,9 @@
+{{- /* Inline version of layouts/embed.html's frame: shows a PDF / standalone
+  HTML file in an iframe inside the page body, no click needed.
+    {{< embed doc="path/under/static.html" aspect="16/9" title="..." >}}
+  `aspect` is optional (without it the frame is 85vh tall, like embed.html). */ -}}
+{{- $src := .Get "doc" | relURL -}}
+{{- $aspect := .Get "aspect" -}}
+<div class="embed-frame embed-inline{{ with $aspect }} embed-frame-ratio{{ end }}"{{ with $aspect }} style="--ratio: {{ . | safeCSS }}"{{ end }}>
+  <iframe src="{{ $src }}" title="{{ .Get "title" | default "Embedded document" }}" allowfullscreen></iframe>
+</div>

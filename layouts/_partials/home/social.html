@@ -1,0 +1,10 @@
+{{/* Override: social links from params.social as outlined buttons in the hero.
+     The fa-2x size class used by the theme's icon row is dropped here. */}}
+{{ range sort .Site.Params.social "weight" }}
+  <a class="btn btn-ghost" href="{{ .url | safeURL }}" aria-label="{{ .name }}"
+     {{- with .rel }} rel="{{ . }}"{{ end }}{{ with .target }} target="{{ . }}"{{ end }}{{ with .type }} type="{{ . }}"{{ end }}>
+    {{ with .icon }}<i class="{{ replace . "fa-2x" "" }}" aria-hidden="true"></i>{{ end }}
+    <span>{{ .name }}</span>
+    {{ if hasPrefix .url "http" }}<span class="btn-ext" aria-hidden="true">↗</span>{{ end }}
+  </a>
+{{ end }}

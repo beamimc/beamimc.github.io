@@ -1,7 +1,10 @@
 // Copy of themes/hugo-coder/assets/scss/_variables.scss — overrides the theme.
-// Only change from the theme: $link-color / $link-color-dark set to the site accent (aqua blue).
+// Changes from the theme: fonts (Inter body, JetBrains Mono code; loaded in
+// layouts/_partials/head/extensions.html), the colors below (slate light / navy dark,
+// matching the CSS variables in assets/css/custom.css), and the aqua-blue link colors.
 // Fonts
-$font-family: -apple-system,
+$font-family: "Inter",
+-apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
 Roboto,
@@ -17,26 +20,27 @@ STXihei,"华文细黑",
 SimSun,"宋体",
 Heiti,"黑体",
 sans-serif;
-$code-font-family: "SF Mono",
+$code-font-family: "JetBrains Mono",
+"SF Mono",
 Consolas,
 Liberation Mono,
 Menlo,
 monospace;
 
 // Colors
-$bg-color: #fafafa !default;
-$fg-color: #212121 !default;
-$alt-bg-color: #e0e0e0 !default;
-$alt-fg-color: #000 !default;
-$darker-alt-bg-color: #ccc !default;
+$bg-color: #f7f8fa !default;
+$fg-color: #1e293b !default;
+$alt-bg-color: #e3e8ee !default;
+$alt-fg-color: #0f172a !default;
+$darker-alt-bg-color: #cbd3dd !default;
 $link-color: #0a7ea4 !default;
 
 // Dark colors
-$bg-color-dark: #212121 !default;
-$fg-color-dark: #dadada !default;
-$alt-bg-color-dark: #424242 !default;
-$alt-fg-color-dark: #dadada !default;
-$lighter-alt-bg-color-dark: #4f4f4f !default;
+$bg-color-dark: #0d1321 !default;
+$fg-color-dark: #d5dbe7 !default;
+$alt-bg-color-dark: #1b2438 !default;
+$alt-fg-color-dark: #eceff6 !default;
+$lighter-alt-bg-color-dark: #262f47 !default;
 $link-color-dark: #22d3ee !default;
 
 // Notice colors

@@ -14,7 +14,7 @@
       {{ if ne .title $.Title }}<h2 class="cv-section-title">{{ .title }}</h2>{{ end }}
       <div class="cv-timeline">
       {{ range .entries }}
-        <div class="cv-entry">
+        <div class="cv-entry{{ if in (.dates | default "") "Present" }} current{{ end }}">
           <div class="cv-entry-head">
             <span class="cv-role">{{ .role }}</span>
             {{ with .organization }}<span class="cv-org"> · {{ . }}</span>{{ end }}

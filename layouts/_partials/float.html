@@ -1,0 +1,17 @@
+{{/* Override: the theme's floating dark-mode button is replaced by the toggle in header.html.
+     This partial is the first thing inside <body>, so it also applies the saved colour
+     scheme before anything is painted. Otherwise each page would first render as
+     colorscheme-auto (the OS theme) and flip once coder.js runs at the end of <body>. */}}
+<script>
+  (function () {
+    try {
+      var s = localStorage.getItem("colorscheme");
+      if (s === "dark" || s === "light") {
+        var b = document.body;
+        b.classList.remove("colorscheme-auto", "colorscheme-light", "colorscheme-dark");
+        b.classList.add("colorscheme-" + s);
+        document.documentElement.style.colorScheme = s;
+      }
+    } catch (e) {}
+  })();
+</script>

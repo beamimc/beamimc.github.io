@@ -3,7 +3,8 @@
 {{ end }}
 {{ define "content" }}
 <style>
-  /* Horizontal cards: logo / cover panel on the left, text on the right */
+  /* Horizontal cards: logo / cover panel on the left, text on the right.
+     Colors come from the CSS variables in assets/css/custom.css (light + dark). */
   .project-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -16,10 +17,9 @@
     overflow: hidden;
     display: grid;
     grid-template-columns: 180px 1fr;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border);
     border-radius: 16px;
-    background: #ffffff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: var(--surface);
     transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
     animation: rise-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
     animation-delay: calc(var(--i, 0) * 90ms);
@@ -27,36 +27,21 @@
   .project-card.has-cover { grid-template-columns: 280px 1fr; }
   .project-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(10, 126, 164, 0.45);
-    box-shadow: 0 14px 34px -10px rgba(10, 126, 164, 0.35);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-hover);
   }
-  /* Accent bar that grows down the left edge on hover */
-  .project-card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, #22d3ee, #0a7ea4);
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.35s ease;
-    z-index: 2;
-  }
-  .project-card:hover::before { transform: scaleY(1); }
 
   .project-media {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.6rem;
-    background: radial-gradient(circle at 30% 25%, rgba(34, 211, 238, 0.16), transparent 70%), #f3f6f8;
+    border-right: 1px solid var(--border);
+    background: radial-gradient(circle at 30% 25%, var(--accent-soft), transparent 70%), var(--surface-2);
   }
   .has-cover .project-media {
     padding: 1rem;
     background: #ffffff; /* figures are drawn for a white page */
-    border-right: 1px solid #eeeeee;
   }
   .project-logo {
     display: block;
@@ -65,63 +50,47 @@
     object-fit: contain;
     transition: transform 0.35s ease;
   }
-  .project-card:hover .project-logo { transform: scale(1.06); }
+  .project-card:hover .project-logo { transform: scale(1.06) rotate(-3deg); }
   .project-cover { display: block; width: 100%; max-height: 220px; object-fit: contain; }
 
-  .project-body { display: flex; flex-direction: column; padding: 1.6rem 1.8rem; min-width: 0; }
-  .project-title { margin: 0 0 0.4rem; font-size: 1.9rem; line-height: 1.25; text-align: left; }
-  .project-title a { text-decoration: none; }
+  .project-body { display: flex; flex-direction: column; padding: 1.8rem 2rem; min-width: 0; }
+  .project-title { margin: 0 0 0.4rem; font-size: 2rem; line-height: 1.25; text-align: left; color: var(--text); }
+  .project-title a { color: inherit; text-decoration: none; }
   /* Make the whole card clickable; buttons stay above the overlay */
   .project-card-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
   .software-list .project-card p.project-desc {
-    margin: 0 0 1rem;
-    font-size: 1.3rem;
-    line-height: 1.5;
-    opacity: 0.8;
+    margin: 0 0 1.2rem;
+    font-size: 1.4rem;
+    line-height: 1.55;
+    color: var(--muted);
     text-align: left;
     hyphens: manual;
   }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.4rem; }
   .project-tag {
-    font-size: 1rem;
-    line-height: 1.4;
-    padding: 0.15rem 0.7rem;
-    border-radius: 999px;
-    background: rgba(10, 126, 164, 0.08);
-    color: #0a6a8a;
+    padding: 0.2rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface-2);
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: var(--muted);
   }
   /* Buttons use .link-button from assets/css/custom.css, made compact + pill-shaped here */
   .project-links { position: relative; z-index: 3; margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.6rem; }
-  .project-links .link-button { padding: 0.45rem 1.1rem; border-radius: 999px; font-size: 1.2rem; }
+  .project-links .link-button { padding: 0.45rem 1.2rem; border-radius: 999px; font-size: 1.25rem; }
   .project-links .link-button i { font-size: 1.4rem; }
   /* "Explore" cue on clickable cards without buttons */
-  .project-explore { margin-top: auto; font-size: 1.3rem; font-weight: 600; color: #0a7ea4; }
+  .project-explore { margin-top: auto; font-family: var(--mono); font-size: 1.25rem; font-weight: 500; color: var(--accent); }
   .project-explore i { transition: transform 0.25s ease; }
   .project-card:hover .project-explore i { transform: translateX(4px); }
-  body.colorscheme-dark .project-explore { color: #22d3ee; }
-  @media (prefers-color-scheme: dark) { body.colorscheme-auto .project-explore { color: #22d3ee; } }
 
   @media only screen and (max-width: 640px) {
     .project-card,
     .project-card.has-cover { grid-template-columns: 1fr; }
-    .project-media { padding: 1.4rem; }
-    .has-cover .project-media { border-right: 0; border-bottom: 1px solid #eeeeee; }
+    .project-media { padding: 1.4rem; border-right: 0; border-bottom: 1px solid var(--border); }
     .project-logo { width: 110px; height: 110px; }
-  }
-
-  /* Dark mode — forced toggle */
-  body.colorscheme-dark .project-card { background: linear-gradient(145deg, #2b2b2b, #252525); border-color: rgba(255, 255, 255, 0.08); }
-  body.colorscheme-dark .project-card:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 14px 34px -10px rgba(34, 211, 238, 0.3); }
-  body.colorscheme-dark .project-media { background: radial-gradient(circle at 30% 25%, rgba(34, 211, 238, 0.14), transparent 70%), #1d1d1d; }
-  body.colorscheme-dark .has-cover .project-media { background: #ffffff; border-color: #4f4f4f; }
-  body.colorscheme-dark .project-tag { background: rgba(34, 211, 238, 0.1); color: #8ae6f4; }
-  /* Dark mode — auto (follows OS) */
-  @media (prefers-color-scheme: dark) {
-    body.colorscheme-auto .project-card { background: linear-gradient(145deg, #2b2b2b, #252525); border-color: rgba(255, 255, 255, 0.08); }
-    body.colorscheme-auto .project-card:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 14px 34px -10px rgba(34, 211, 238, 0.3); }
-    body.colorscheme-auto .project-media { background: radial-gradient(circle at 30% 25%, rgba(34, 211, 238, 0.14), transparent 70%), #1d1d1d; }
-    body.colorscheme-auto .has-cover .project-media { background: #ffffff; border-color: #4f4f4f; }
-    body.colorscheme-auto .project-tag { background: rgba(34, 211, 238, 0.1); color: #8ae6f4; }
   }
 </style>
 

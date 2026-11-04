@@ -22,8 +22,8 @@ category = 'categories'
   author = 'Bea'
   description = 'Notes, projects, and things worth sharing.'
   keywords = 'personal,projects,research'
-  # Static line(s) shown under your name on the landing page
-  info = ['PhD student']
+  # Mono "eyebrow" line above the homepage headline (joined with " · ")
+  info = ['PhD student', 'UNC Chapel Hill']
   # Typewriter line typed out below the info (set to '' to hide it).
   # Can also be a list of phrases to cycle through.
   typewriter = "This website is still a work in progress 🚧\nMore to come!"
@@ -37,6 +37,14 @@ category = 'categories'
   hideColorSchemeToggle = false
   # Site-wide custom stylesheet (assets/css/custom.css)
   customCSS = ['css/custom.css']
+  # Rubber duck favicon (static/images/duck.svg)
+  faviconSVG = '/images/duck.svg'
+
+# Homepage hero (layouts/_partials/home/author.html).
+# greeting/bio accept markdown; **bold** text in the greeting gets the accent color.
+[params.hero]
+  greeting = "Hi, I'm **Bea**"
+  bio = "I'm interested in building open-source tools that make biological data easier to explore, analyze, and understand."
 
 # Social icons on the landing page — add/remove as you like.
 # icon uses Font Awesome classes.

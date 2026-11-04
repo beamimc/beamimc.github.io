@@ -1,41 +1,80 @@
-{{/* Homepage sections below the intro: Software and Projects, pulled from content/ */}}
-<section class="container home-sections">
+{{/* Homepage sections below the hero, numbered 01, 02, ...: Software and Projects
+     (pulled from content/) and a short Experience timeline (from data/experience.yaml). */}}
+{{ $n := 0 }}
+<div class="home-sections" id="work">
   {{ with site.GetPage "/software" }}
-  <div class="home-section">
-    <h2 class="home-section-title">{{ .Title }} <a href="{{ .RelPermalink }}">All {{ lower .Title }} <i class="fa-solid fa-arrow-right"></i></a></h2>
-    <div class="home-sw-grid">
-      {{ range .Pages.ByWeight }}
+  {{ $n = add $n 1 }}
+  <section class="home-section">
+    <div class="container">
+      <h2 class="section-head"><span class="section-num">{{ printf "%02d" $n }}</span> {{ .Title }} <a class="section-more" href="{{ .RelPermalink }}">All {{ lower .Title }} <i class="fa-solid fa-arrow-right"></i></a></h2>
+      <div class="home-sw-grid">
+        {{ range .Pages.ByWeight }}
+          {{ $title := .Title }}
+          {{/* Entries with details = true open their own page; others link to docs, else the repo */}}
+          {{ $href := .Params.docs | default .Params.repo | default .Parent.RelPermalink }}
+          {{ if .Params.details }}{{ $href = .RelPermalink }}{{ end }}
+          <a class="home-sw-card" href="{{ $href }}"{{ if hasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>
+            {{ with .Resources.GetMatch (.Params.logo | default "logo.*") }}<img src="{{ .RelPermalink }}" alt="{{ $title }} logo">{{ end }}
+            <span>
+              <b>{{ .Title }}</b>
+              {{ with .Description }}<small>{{ . }}</small>{{ end }}
+            </span>
+            <i class="card-arrow fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  {{ with site.GetPage "/projects" }}
+  {{ $n = add $n 1 }}
+  <section class="home-section">
+    <div class="container">
+      <h2 class="section-head"><span class="section-num">{{ printf "%02d" $n }}</span> {{ .Title }} <a class="section-more" href="{{ .RelPermalink }}">All {{ lower .Title }} <i class="fa-solid fa-arrow-right"></i></a></h2>
+      {{ range first 3 .Pages.ByWeight }}
         {{ $title := .Title }}
-        {{/* Software entries have no page of their own: link to docs, else the repo */}}
-        {{ $href := .Params.docs | default .Params.repo | default .Parent.RelPermalink }}
-        <a class="home-sw-card" href="{{ $href }}"{{ if hasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>
-          {{ with .Resources.GetMatch (.Params.logo | default "logo.*") }}<img src="{{ .RelPermalink }}" alt="{{ $title }} logo">{{ end }}
+        <a class="home-proj-card" href="{{ .RelPermalink }}">
+          {{ with .Resources.GetMatch (.Params.cover | default "cover.*") }}
+            <img src="{{ partial "card-image-src.html" (dict "res" . "width" 400) }}" alt="{{ $title }} preview">
+          {{ end }}
           <span>
             <b>{{ .Title }}</b>
             {{ with .Description }}<small>{{ . }}</small>{{ end }}
+            <em>Explore <i class="fa-solid fa-arrow-right"></i></em>
           </span>
         </a>
       {{ end }}
     </div>
-  </div>
+  </section>
   {{ end }}
 
-  {{ with site.GetPage "/projects" }}
-  <div class="home-section">
-    <h2 class="home-section-title">{{ .Title }} <a href="{{ .RelPermalink }}">All {{ lower .Title }} <i class="fa-solid fa-arrow-right"></i></a></h2>
-    {{ range first 3 .Pages.ByWeight }}
-      {{ $title := .Title }}
-      <a class="home-proj-card" href="{{ .RelPermalink }}">
-        {{ with .Resources.GetMatch (.Params.cover | default "cover.*") }}
-          <img src="{{ partial "card-image-src.html" (dict "res" . "width" 400) }}" alt="{{ $title }} preview">
+  {{ with site.GetPage "/experience" }}
+  {{ $page := . }}
+  {{ with hugo.Data.experience.sections }}{{ with index . 0 }}
+  {{ $n = add $n 1 }}
+  <section class="home-section">
+    <div class="container">
+      <h2 class="section-head"><span class="section-num">{{ printf "%02d" $n }}</span> {{ $page.Title }} <a class="section-more" href="{{ $page.RelPermalink }}">Full {{ lower $page.Title }} <i class="fa-solid fa-arrow-right"></i></a></h2>
+      <div class="cv-timeline">
+        {{ range first 4 .entries }}
+          <div class="cv-entry{{ if in (.dates | default "") "Present" }} current{{ end }}">
+            <div class="cv-entry-head">
+              <span class="cv-role">{{ .role }}</span>
+              {{ with .organization }}<span class="cv-org"> · {{ . }}</span>{{ end }}
+            </div>
+            {{ if or .dates .location }}
+              <div class="cv-dates">
+                {{- with .dates }}{{ . }}{{ end -}}
+                {{- if and .dates .location }} · {{ end -}}
+                {{- with .location }}{{ . }}{{ end -}}
+              </div>
+            {{ end }}
+          </div>
         {{ end }}
-        <span>
-          <b>{{ .Title }}</b>
-          {{ with .Description }}<small>{{ . }}</small>{{ end }}
-          <em>Explore <i class="fa-solid fa-arrow-right"></i></em>
-        </span>
-      </a>
-    {{ end }}
-  </div>
+      </div>
+    </div>
+  </section>
+  {{ end }}{{ end }}
   {{ end }}
-</section>
+</div>
