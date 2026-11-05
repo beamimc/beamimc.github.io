@@ -21,6 +21,12 @@ name = 'splicelogic vignette'
 url = 'https://thelovelab.github.io/splicelogic/'
 icon = 'fa-solid fa-book'
 description = 'Package docs and tutorial'
+
+[[links]]
+name = 'splicelogic preprint'
+url = 'https://mikelove.github.io/assets/splicelogic.pdf'
+icon = 'fa-solid fa-file-lines'
+description = 'Read the preprint (PDF)'
 +++
 
 {{< link-tiles >}}

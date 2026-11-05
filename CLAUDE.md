@@ -38,7 +38,7 @@ python3 scripts/make-splain-logo-gif.py   # regenerate the animated splain logo 
 
 **Layout reuse via front matter**, which is the main thing you can't see from the file tree:
 - `content/projects/_index.md` sets `type = 'software'`, so Projects and Software both render with the card grid in `layouts/software/list.html`. That template's CSS is inline in a `<style>` block, not in `custom.css`.
-- Card fields come from each child page's front matter: `description`, `tags`, `weight` (order), `repo`, `docs`, `logo` (defaults to `logo.*` in the bundle), `cover` (defaults to `cover.*`, which switches the card to the wide-image variant), and `details = true` (makes the whole card link to the page).
+- Card fields come from each child page's front matter: `description`, `tags`, `weight` (order), `repo`, `docs`, `preprint`, `logo` (defaults to `logo.*` in the bundle), `cover` (defaults to `cover.*`, which switches the card to the wide-image variant), and `details = true` (makes the whole card link to the page).
 - `layout = 'page-section'` makes a section `_index.md` render like a single page (`layouts/page-section.html`) instead of a post list.
 - `layout = 'embed'` plus `doc = '<path under static/>'` renders a page that's a full-width iframe of a PDF or HTML file (`layouts/embed.html`).
 - `{{< embed doc="..." aspect="16/9" >}}` puts the same frame inline in a page's text. A `.mp4`/`.webm` `doc` becomes a GIF-like video (autoplay, muted, loop, no controls; optional `poster`); anything else is an iframe.

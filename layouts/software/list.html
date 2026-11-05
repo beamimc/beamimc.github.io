@@ -124,10 +124,11 @@
               {{ range . }}<span class="project-tag">{{ . }}</span>{{ end }}
             </div>
           {{ end }}
-          {{ if or .Params.repo .Params.docs }}
+          {{ if or .Params.repo .Params.docs .Params.preprint }}
           <div class="project-links">
             {{ with .Params.repo }}<a class="link-button" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i><span>Code</span></a>{{ end }}
             {{ with .Params.docs }}<a class="link-button" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-book"></i><span>Docs</span></a>{{ end }}
+            {{ with .Params.preprint }}<a class="link-button" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines"></i><span>Preprint</span></a>{{ end }}
           </div>
           {{ else if .Params.details }}
           <span class="project-explore">Explore <i class="fa-solid fa-arrow-right"></i></span>
