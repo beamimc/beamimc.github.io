@@ -12,8 +12,7 @@ mkdir -p "$DEST"
 
 cp "$SRC/splicelogic-prepare-exons-standalone.html" "$DEST/prepare-exons.html"
 cp "$SRC/splicelogic-event-types-standalone.html" "$DEST/event-types.html"
-# Shown inline on the splicelogic page itself ({{< embed >}} in _index.md)
-cp "$SRC/splicelogic-summary-standalone.html" "$DEST/summary.html"
+# The summary animation is recorded to MP4 instead: scripts/record-splicelogic-summary.sh
 for c in atss a5ss se mxe a3ss ri ates; do
   cp "$SRC/mini/splicelogic-mini-$c-standalone.html" "$DEST/mini-$c.html"
 done

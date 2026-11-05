@@ -34,7 +34,7 @@ group = 'links'
 
 splicelogic is an R/Bioconductor package that turns sets of transcripts into discrete splicing events. Within each gene it compares two groups of transcripts, `up` and `down`, using their full exon structures, and reports each difference as a splicing event. The two groups can be any partition of the transcripts, such as novel versus annotated, or disease versus control. They can also come from a differential transcript usage (DTU) analysis, where the sign of each transcript's effect estimate decides its group.
 
-{{< embed doc="software/splicelogic/animations/summary.html" aspect="16/9" title="How find_all_events() works" >}}
+{{< embed doc="software/splicelogic/animations/summary.mp4" poster="software/splicelogic/animations/summary-poster.jpg" aspect="16/9" title="How find_all_events() works" >}}
 
 ## Links
 

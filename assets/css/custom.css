@@ -680,3 +680,7 @@ body.colorscheme-dark .theme-toggle .icon-sun { display: block; }
 
 /* Inline embeds in page text ({{< embed >}}, e.g. the splicelogic summary) */
 .embed-inline { margin: 1.6rem auto 2rem; }
+/* A video embed reads like a GIF: the animation's own light page colour, no
+   dark player backdrop */
+.embed-video { background: #F4F4F2; }
+.embed-video video { display: block; width: 100%; height: 100%; object-fit: cover; }

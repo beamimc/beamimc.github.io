@@ -1,9 +1,18 @@
-{{- /* Inline version of layouts/embed.html's frame: shows a PDF / standalone
-  HTML file in an iframe inside the page body, no click needed.
+{{- /* Inline version of layouts/embed.html's frame, shown in the page body
+  (no click needed).
     {{< embed doc="path/under/static.html" aspect="16/9" title="..." >}}
+  A video `doc` (.mp4 / .webm) plays like a GIF: autoplay, muted, looping,
+  no controls. `poster` (optional) is its still image while it loads.
   `aspect` is optional (without it the frame is 85vh tall, like embed.html). */ -}}
-{{- $src := .Get "doc" | relURL -}}
+{{- $doc := .Get "doc" -}}
+{{- $src := $doc | relURL -}}
 {{- $aspect := .Get "aspect" -}}
-<div class="embed-frame embed-inline{{ with $aspect }} embed-frame-ratio{{ end }}"{{ with $aspect }} style="--ratio: {{ . | safeCSS }}"{{ end }}>
-  <iframe src="{{ $src }}" title="{{ .Get "title" | default "Embedded document" }}" allowfullscreen></iframe>
+{{- $title := .Get "title" | default "Embedded document" -}}
+{{- $isVideo := in (slice ".mp4" ".webm") (path.Ext $doc | lower) -}}
+<div class="embed-frame embed-inline{{ with $aspect }} embed-frame-ratio{{ end }}{{ if $isVideo }} embed-video{{ end }}"{{ with $aspect }} style="--ratio: {{ . | safeCSS }}"{{ end }}>
+  {{- if $isVideo }}
+  <video src="{{ $src }}"{{ with .Get "poster" }} poster="{{ . | relURL }}"{{ end }} autoplay muted loop playsinline disablepictureinpicture aria-label="{{ $title }}"></video>
+  {{- else }}
+  <iframe src="{{ $src }}" title="{{ $title }}" allowfullscreen></iframe>
+  {{- end }}
 </div>
