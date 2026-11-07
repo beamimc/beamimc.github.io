@@ -6,7 +6,7 @@ tags = ['R', 'Bioconductor','alternative splicing', 'RNA-seq', 'bioinformatics']
 # Custom fields used by the card + detail page (all optional):
 repo = 'https://github.com/thelovelab/splicelogic'
 docs = 'https://thelovelab.github.io/splicelogic/'
-preprint = 'https://mikelove.github.io/assets/splicelogic.pdf'
+preprint = 'https://www.biorxiv.org/content/10.64898/2026.10.30.762958v1'
 # Animated hex, made by scripts/make-splicelogic-icons.py. splicelogic_logo.svg
 # (matrix-rain version) and splicelogic_logo.png (original still) are kept.
 logo = 'splicelogic_logo_anim.svg'
@@ -34,9 +34,9 @@ group = 'links'
 
 [[links]]
 name = 'splicelogic preprint'
-url = 'https://mikelove.github.io/assets/splicelogic.pdf'
+url = 'https://www.biorxiv.org/content/10.64898/2026.10.30.762958v1'
 icon = 'fa-solid fa-file-lines'
-description = 'Read the preprint (PDF)'
+description = 'Read the preprint on bioRxiv'
 group = 'links'
 +++
 

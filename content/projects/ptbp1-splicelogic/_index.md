@@ -24,9 +24,9 @@ description = 'Package docs and tutorial'
 
 [[links]]
 name = 'splicelogic preprint'
-url = 'https://mikelove.github.io/assets/splicelogic.pdf'
+url = 'https://www.biorxiv.org/content/10.64898/2026.10.30.762958v1'
 icon = 'fa-solid fa-file-lines'
-description = 'Read the preprint (PDF)'
+description = 'Read the preprint on bioRxiv'
 +++
 
 {{< link-tiles >}}
